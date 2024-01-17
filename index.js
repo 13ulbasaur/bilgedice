@@ -1,6 +1,7 @@
 
 const worker = new Worker('worker.js');
 
+
 const playerRolls = document.querySelector('#player-rolls');
 const playerHand = document.querySelector('#player-hand');
 const opponentHands = [
@@ -15,6 +16,9 @@ const diceDivs = document.querySelectorAll('.dice-container');
 const diceImages = document.querySelectorAll('.dice-image');
 const diceLabels = document.querySelectorAll('.dice-label');
 const winrateSpan = document.querySelector('#winrate');
+
+const helperInput = document.getElementById("helperInput");
+const helperButton = document.getElementById("helperButton");
 
 document.querySelectorAll('.dice-input').forEach(input => {
     input.addEventListener('input', event => {
@@ -73,12 +77,24 @@ async function submitTrigger() {
 
 }
 
-const helperInput = document.getElementById("helperInput");
+async function readHelperInput() {
+    const rollsObject =  JSON.parse(helperInput.value);
+    playerRolls.value = rollsObject.playerRolls;
+    playerHand.value = rollsObject.playerHand;
+    opponentHands[0].value = rollsObject.opponentHand1;
+    opponentHands[1].value = rollsObject.opponentHand2;
+    opponentHands[2].value = rollsObject.opponentHand3;
+    submitTrigger();
+}
+
 helperInput.addEventListener("keyup", async event => {
     if (event.key === "Enter") {
-        console.log("test");
-        submitTrigger();
+        readHelperInput()
     }
+});
+
+helperButton.addEventListener('click', async event => {
+    readHelperInput()
 });
 
 submitButton.addEventListener('click', async event => {
