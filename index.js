@@ -85,6 +85,7 @@ async function readHelperInput() {
     opponentHands[1].value = rollsObject.opponentHand2;
     opponentHands[2].value = rollsObject.opponentHand3;
     submitTrigger();
+    helperInput.value = "";
 }
 
 helperInput.addEventListener("keyup", async event => {
