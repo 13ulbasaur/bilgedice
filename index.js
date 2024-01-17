@@ -28,7 +28,7 @@ document.querySelectorAll('.dice-input').forEach(input => {
     });
 });
 
-function submitTrigger() {
+async function submitTrigger() {
     if (!validateInput()) {
         return;
     }
@@ -74,8 +74,9 @@ function submitTrigger() {
 }
 
 const helperInput = document.getElementById("helperInput");
-helperInput.addEventListener("keyup", function(event) {
+helperInput.addEventListener("keyup", async event => {
     if (event.key === "Enter") {
+        console.log("test");
         submitTrigger();
     }
 });
